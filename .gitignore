@@ -1,0 +1,25 @@
+__pycache__/
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg-info/
+*.egg
+*.log
+
+
+venv/
+
+.vscode/
+.idea/
+
+
+.DS_Store
+Thumbs.db
+
+
+db.sqlite3
+
+
+# Static files
+staticfiles/
