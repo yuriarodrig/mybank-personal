@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Banks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  </head>
+  <body class="bg-light py-5">
+
+    <div class="container">
+      <h1 class="mb-4">Enviar Extrato Bancário</h1>
+
+      <form method="POST" enctype="multipart/form-data" action="{% url 'banks:upload_statement' %}">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          <label for="bank" class="form-label">Banco</label>
+          <select name="bank_id" id="bank" class="form-select" required>
+            <option value=>-------------------</option>
+            {% for bank in banks %}
+              <option value="{{ bank.id }}">{{ bank.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="month" class="form-label">Mês do Extrato</label>
+          <input type="month" name="month" id="month" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="format" class="form-label">Formato do Arquivo</label>
+          <select name="format" id="format" class="form-select" required>
+            <option value="pdf">PDF</option>
+            <option value="csv">CSV</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="statement" class="form-label">Arquivo do Extrato</label>
+          <input type="file" name="statement" id="statement" class="form-control" accept=".pdf,.csv" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+  </body>
+</html>
